@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
         marginTop: 70
     },
     imageStyle:{
-        width:100,
-        height:100
+        width:'auto',
+        height:'auto'
     },
     titleStyle:{
         fontWeight:'medium',

@@ -111,10 +111,10 @@ const RegisterScreen = ({navigation}) => {
         <TouchableOpacity style={{alignSelf:'flex-start', marginTop:60}} onPress={()=> navigation.navigate('Get-Started')}   >
             <Ionicons name='chevron-back' size={40} ></Ionicons>
         </TouchableOpacity>
-        <TouchableOpacity onPress={pickImage}>
+        {/* <TouchableOpacity onPress={pickImage}>
             <Avatar.Image size={120} source={{uri: localImageUrl}} />
             <Text style={{textAlign:'center', fontSize:20}} >Choose Image</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={styles.form}>
             <TextInput autoCapitalize='none' onChangeText={(text)=>setUsername(text)} style={styles.input} placeholder='@Username' ></TextInput>

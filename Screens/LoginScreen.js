@@ -87,7 +87,7 @@ const LoginScreen = ({navigation}) => {
            { isLoading && <ActivityIndicator size={30}></ActivityIndicator>}
             <CustomButton title="Sign In" primary={true} onPress={handleSignIn} />
             <TouchableOpacity style={styles.signUp} onPress={()=> navigation.navigate('Register')}>
-                <Text style={styles.signUpText}>Don't have an account? Sign Up</Text>
+                <Text style={styles.signUpText}>Don't have an account?   Sign Up</Text>
             </TouchableOpacity>
         </View>
     );
@@ -108,12 +108,13 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        borderColor: '#ccc',
+        borderColor: '#1e1ebe',
         borderWidth: 1,
         borderRadius: 8,
         paddingHorizontal: 10,
         marginBottom: 15,
         backgroundColor: '#fff',
+        
     },
     forgotPassword: {
         alignItems: 'flex-end',
@@ -127,11 +128,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     signUpText: {
-        color: '#1e90ff',
+        color: '#6d6d7a',
     },
     logoStyle: {
-        height: 130,
-        width: 130,
+        height: 'auto',
+        width: 'auto',
         alignSelf: 'center'
     }
 });
