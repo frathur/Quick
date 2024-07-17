@@ -8,12 +8,12 @@ const BaseScreen = ({navigation}) => {
         <View style={styles.mainContainer}>
            <View style={styles.logoContainer}>
                 <Image style={styles.imageStyle}  source={require('../assets/logo.png')} />
-                <Text style={styles.titleStyle}>Welcome to cloudChat</Text>
-                <Text style={styles.metaText}>Share with anyone, anywhere.</Text>
+                <Text style={styles.titleStyle}>Welcome to QuickTalk</Text>
+                <Text style={styles.metaText}>Your number one chat app.</Text>
                 <Text style={styles.metaText} >A home for all  the groups in your life</Text>
            </View>
            <View style={styles.welcomeImageContainer}>
-                <Image  style={styles.welcomImageStyle} source={require('../assets/welcom.png')} ></Image>
+                <Image  style={styles.welcomeImageStyle} source={require('../assets/welcome.png')} ></Image>
            </View>
            <View style={styles.buttonContainer}>
             <CustomButton title='Sign In' primary='true' onPress={()=> navigation.navigate('Login')} ></CustomButton>
@@ -46,13 +46,14 @@ const styles = StyleSheet.create({
     metaText:{
         textAlign:'center',
         fontSize:16,
-        fontWeight:'200'
+        fontWeight:'200',
+        Colors:'#45454b',
     },
     welcomeImageContainer:{
         marginTop: 12,
         alignItems:'center'
     },
-    welcomImageStyle: {
+    welcomeImageStyle: {
         height:300,
         width: 200
     },
