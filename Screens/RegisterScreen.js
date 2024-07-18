@@ -5,7 +5,8 @@ import { StyleSheet,
     SafeAreaView,
     TouchableOpacity,
     TextInput,
-    ActivityIndicator
+    ActivityIndicator,
+    Image
     } from 'react-native';
 import { Avatar, Button } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
@@ -108,14 +109,16 @@ const RegisterScreen = ({navigation}) => {
     return (
         <>
        <SafeAreaView style={styles.mainContainer}>
-        <TouchableOpacity style={{alignSelf:'flex-start', marginTop:60}} onPress={()=> navigation.navigate('Get-Started')}   >
-            <Ionicons name='chevron-back' size={40} ></Ionicons>
+        <TouchableOpacity style={{alignSelf:'flex-start', marginTop:60, marginLeft:15}} onPress={()=> navigation.navigate('Get-Started')}   >
+            <Ionicons name='chevron-back' size={20} ></Ionicons>
         </TouchableOpacity>
         {/* <TouchableOpacity onPress={pickImage}>
             <Avatar.Image size={120} source={{uri: localImageUrl}} />
             <Text style={{textAlign:'center', fontSize:20}} >Choose Image</Text>
         </TouchableOpacity> */}
-
+         <View style={styles.welcomeImageContainer}>
+                <Image  style={styles.welcomeImageStyle} source={require('../assets/reg0.png')} ></Image>
+           </View>
         <View style={styles.form}>
             <TextInput autoCapitalize='none' onChangeText={(text)=>setUsername(text)} style={styles.input} placeholder='@Username' ></TextInput>
             
@@ -135,8 +138,9 @@ const RegisterScreen = ({navigation}) => {
         { isLoading && <ActivityIndicator size={30}></ActivityIndicator>}
 
         <CustomButton title='Create Account' primary='true' onPress={handleCreateAccount} />
-        <TouchableOpacity onPress={()=> navigation.navigate('Register')}>
-            <Text>Already Have An Account? SignIn</Text>
+        <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
+            <Text>Already Have An Account?   SignIn</Text>
+            
         </TouchableOpacity>
        </SafeAreaView>
        </>
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        borderColor: '#ccc',
+        borderColor: Colors.primary_color,
         borderWidth: 1,
         borderRadius: 8,
         paddingHorizontal: 10,
@@ -168,7 +172,15 @@ const styles = StyleSheet.create({
         width:"90%"
         
 
-    }
+    },
+    welcomeImageContainer:{
+        marginTop: 12,
+        alignItems:'center'
+    },
+    welcomeImageStyle: {
+        height:150,
+        width: 200,
+    },
 })
 
 export default RegisterScreen;
