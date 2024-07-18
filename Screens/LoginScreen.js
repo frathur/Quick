@@ -99,12 +99,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 20,
         backgroundColor: Colors.background_color,
+        
     },
     title: {
         fontSize: 24,
-        fontWeight: 'bold',
+        fontWeight: '600',
         marginBottom: 20,
         textAlign: 'center',
+        
     },
     input: {
         height: 50,
@@ -131,9 +133,10 @@ const styles = StyleSheet.create({
         color: '#6d6d7a',
     },
     logoStyle: {
-        height: 'auto',
-        width: 'auto',
-        alignSelf: 'center'
+        height: 100,
+        width: 120,
+        alignSelf: 'center',
+        marginBottom:-10
     }
 });
 

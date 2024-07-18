@@ -117,7 +117,7 @@ const RegisterScreen = ({navigation}) => {
             <Text style={{textAlign:'center', fontSize:20}} >Choose Image</Text>
         </TouchableOpacity> */}
          <View style={styles.welcomeImageContainer}>
-                <Image  style={styles.welcomeImageStyle} source={require('../assets/reg0.png')} ></Image>
+                <Image  style={styles.welcomeImageStyle} source={require('../assets/Shield.png')} ></Image>
            </View>
         <View style={styles.form}>
             <TextInput autoCapitalize='none' onChangeText={(text)=>setUsername(text)} style={styles.input} placeholder='@Username' ></TextInput>
@@ -167,9 +167,9 @@ const styles = StyleSheet.create({
         
     },
     form: {
-        marginTop:15,
+        marginTop:-5,
         backgroundColor: Colors.background_color,
-        width:"90%"
+        width:"80%"
         
 
     },
@@ -178,8 +178,11 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     welcomeImageStyle: {
-        height:150,
+        height:130,
         width: 200,
+        marginLeft:100,
+        marginBottom:5,
+        marginTop:-10
     },
 })
 
