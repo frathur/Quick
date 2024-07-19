@@ -46,22 +46,13 @@ const RegisterScreen = ({navigation}) => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
     
-            const storage = getStorage();
-            const storageRef = ref(storage, `avatars/${Date.now()}`);
-            await uploadBytes(storageRef, imageBlob);
-            alert('Image uploaded');
-    
-            // Retrieve the download URL of the uploaded image
-            const downloadURL = await getDownloadURL(storageRef);
-            setAvatarUrl(downloadURL);
     
             // Prepare user data for Firestore
             const userData = {
                 username: username,
                 email: email,
-                bio: 'Hey there I am on cloud Chat',
+                bio: 'welcome to quick talkr',
                 contacts: [],
-                profileUrl: downloadURL,
                 status: 'online',
                 phone: '',
                 birthday: ''
@@ -83,26 +74,7 @@ const RegisterScreen = ({navigation}) => {
     };
     
 
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.canceled) {
-            const response = await fetch(result.assets[0].uri);
-            const blob = await response.blob();
-            if( result.assets[0].type == 'image') {
-                setImageBlob(blob)
-                setLocalUrl(result.assets[0].uri)
-            }
-    
-        }
-    };
+  
     
       
 
@@ -131,7 +103,7 @@ const RegisterScreen = ({navigation}) => {
             </TextInput>
             <View style={{flexDirection:'row', justifyContent:"center"}}>
            
-                <Text style={{fontSize:12, paddingVertical:16, fontWeight:'100'}} >Sync contacts with servers</Text>
+                <Text style={{fontSize:12, paddingVertical:16, fontWeight:'100'}} ></Text>
             </View>
             </View>
         

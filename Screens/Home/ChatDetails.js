@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image, Pressable } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image, Pressable ,ImageBackground} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '../../constants/Colors';
@@ -35,7 +35,7 @@ const ChatDetails = ({ navigation, route }) => {
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} style={{ paddingTop: 6, margin: 4 }} />
+          <Ionicons name="arrow-back" size={20} style={{ paddingTop: 6, margin: 4 ,color:Colors.primary_color}} />
           <TouchableOpacity style={{ paddingHorizontal: 5 }} onPress={() => navigation.navigate('Profile', { username: route.params.username })}>
             <Avatar.Image size={45} source={{ uri: route.params.profileUrl }} />
           </TouchableOpacity>
@@ -51,10 +51,10 @@ const ChatDetails = ({ navigation, route }) => {
       headerRight: () => (
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={()=> navigation.navigate('Video-Call')} >
-            <Ionicons style={{ padding: 3, marginHorizontal: 3 }} size={28} name='videocam-outline'></Ionicons>
+            <Ionicons style={{ padding: 3, marginHorizontal: 3 ,color:Colors.primary_color}} size={25} name='videocam-outline'></Ionicons>
           </TouchableOpacity>
           <TouchableOpacity onPress={()=> navigation.navigate('Voice-Call', {avatarUrl:route.params.profileUrl, username:route.params.username})}>
-            <Ionicons style={{ padding: 3, marginHorizontal: 3 }} size={28} name='call-outline'></Ionicons>
+            <Ionicons style={{ padding: 3, marginHorizontal: 3 , color:Colors.primary_color}} size={25} name='call-outline'></Ionicons>
           </TouchableOpacity>
         </View>
       )
@@ -202,9 +202,11 @@ const cancelImageSend = ()=> {
           <Ionicons name="add-circle-outline" style={{marginHorizontal:1}} size={30} color={Colors.primary_color} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleAttachImage}>
-          <Ionicons name='film-outline' style={{marginHorizontal:1}}  size={30} color={Colors.primary_color} />
-        </TouchableOpacity>
+       
+      <ImageBackground
+        source={require('../assets/background.jpeg')}
+        style={styles.background}
+      >
         
         <TextInput
           style={styles.input}
@@ -214,9 +216,12 @@ const cancelImageSend = ()=> {
           onSubmitEditing={handleSendMessage}
           cursorColor={Colors.primary_color}
         />
-        
+      </ImageBackground>
+         <TouchableOpacity onPress={handleAttachImage}>
+          <Ionicons name='attach' style={{marginHorizontal:1}}  size={30} color={Colors.primary_color} />
+        </TouchableOpacity>
         <TouchableOpacity onPress={handleSendMessage}>
-          <Ionicons name="send" size={30} color={Colors.primary_color} />
+          <Ionicons name="send" size={25} color={Colors.primary_color} />
         </TouchableOpacity>
         
       </View>
@@ -239,6 +244,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 12,
     marginVertical: 4,
+    
   },
   sentMessage: {
     backgroundColor: Colors.primary_color,
@@ -256,7 +262,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 12,
     paddingHorizontal: 12,
     backgroundColor: Colors.background_color,
     borderTopWidth: 1,

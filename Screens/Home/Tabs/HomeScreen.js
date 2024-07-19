@@ -119,16 +119,18 @@ const styles = StyleSheet.create({
   flatListContainer: {
     flexGrow: 1,
     paddingBottom: 16,
+    marginLeft:15,
+    fontSize:5,
   },
   fab: {
     position: 'absolute',
-    margin: 16,
+    margin: 10,
     right: 0,
     bottom: 0,
     backgroundColor: Colors.primary_color,
   },
   noDataText: {
-    fontSize: 16,
+    fontSize: 5,
     color: Colors.gray,
     textAlign: 'center',
     marginTop: 20,

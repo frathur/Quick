@@ -41,7 +41,6 @@ const FindChats = ({ navigation }) => {
       receiver: receiver,
       participants: [userId1, userId2],
       messages: [],
-      profileUrl:profileUrl,
       createdAt: new Date(),
       updatedAt: new Date()
     });
@@ -74,7 +73,7 @@ const FindChats = ({ navigation }) => {
       <AccountBar
         avatarUrl={item.profileUrl}
         onPress={() => {
-          handlePress(item.email, item.profileUrl);
+          handlePress(item.username, item.profileUrl);
         }}
         username={`@${item.username}`}
         bio={item.bio}
