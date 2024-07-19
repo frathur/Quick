@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        backgroundColor: 'purple', // Set your desired profile picture color
+        backgroundColor: 'white', // Set your desired profile picture color
     },
     option: {
         flexDirection: 'row',
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'right',
         color:'#555555',
-        fontSize:14
+        fontSize:1
     },
 });
 

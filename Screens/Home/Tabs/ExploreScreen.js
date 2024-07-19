@@ -42,7 +42,7 @@ const ExploreScreen = () => {
     const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.articleContainer} onPress={() => openArticleUrl(item.url)}>
         <TouchableOpacity >
-            <View style={{flexDirection:'row', padding:2, borderWidth:0.5, width:"30%"}} >
+            <View style={{flexDirection:'row', padding:2, borderWidth:0.5, width:"30%",borderColor:Colors.primary_color}} >
             <Text style={{paddingHorizontal:8}}>Follow</Text>
             <Ionicons style={{marginHorizontal:9}} name="add" size={20} color={Colors.primary} />
             </View>

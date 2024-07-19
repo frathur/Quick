@@ -31,13 +31,13 @@ const HomeBase = ({navigation}) => {
                         }
 
                         // You can return any component that you like here!
-                        return <Ionicons name={iconName} size={32} color={color} />;
+                        return <Ionicons name={iconName} size={25} color={color} />;
                     },
                     tabBarActiveTintColor: Colors.primary_color,
                     tabBarInactiveTintColor: 'gray',
                     tabBarStyle: {
                         backgroundColor: Colors.background_color,
-                        height:60
+                        height:50
                     },
                     headerStyle: {
                         backgroundColor: Colors.background_color,
@@ -47,13 +47,29 @@ const HomeBase = ({navigation}) => {
                     },
                 })}
             >
+                
+                    
+                {/* <Tab.Screen name="Contact"  options={{
+                    headerTitleStyle: {
+                        fontSize:28,
+                        fontWeight:'bold'
+                    }
+                }}  component={ExploreScreen} /> */}
+                <Tab.Screen name="Channels" options={{
+                     headerTitleStyle: {
+                        fontSize:28,
+                        fontWeight:'bold'
+                    }
+                }}
+                
+                component={BaseChannelsScreen} />
                 <Tab.Screen name="Home-Screen"   options={{ title: 'Chats', headerRight:() => (
                 <View style={{flexDirection:'row'}}>
                     <TouchableOpacity onPress={()=> navigation.navigate('Copilot')} >
                         <MaterialCommunityIcons size={30} style={{paddingHorizontal:4}} color={Colors.primary_color} name='robot-vacuum' />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=> navigation.navigate("Find-User")}>
-                        <Ionicons color={'gray'} style={{paddingHorizontal:12}} name='person-add-outline' size={28} ></Ionicons>
+                        <Ionicons color={'gray'} style={{paddingHorizontal:15}} name='person-add-outline' size={25} ></Ionicons>
                     </TouchableOpacity>
                     </View>),
         
@@ -64,21 +80,6 @@ const HomeBase = ({navigation}) => {
                  
                 
                 }} component={HomeScreen} />
-                    
-                <Tab.Screen name="Explore"  options={{
-                    headerTitleStyle: {
-                        fontSize:28,
-                        fontWeight:'bold'
-                    }
-                }}  component={ExploreScreen} />
-                <Tab.Screen name="Channels" options={{
-                     headerTitleStyle: {
-                        fontSize:28,
-                        fontWeight:'bold'
-                    }
-                }}
-                
-                component={BaseChannelsScreen} />
 
                 <Tab.Screen name="Settings" options={{
                     headerStyle:

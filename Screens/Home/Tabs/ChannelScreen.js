@@ -104,14 +104,16 @@ function AllChannelsScreen() {
                     marginHorizontal: 3,
                     marginVertical: 8,
                     backgroundColor: '#e8f3f5',
-                    height: 55
+                    height: 50,
+                    marginLeft:15,
+                    width:330,
                 }}
                 cursorColor={Colors.primary_color}
             />
             <View>
                 
             </View>
-            {filteredChannels.length === 0 && <Text style={{ textAlign: 'center', fontSize: 23, fontWeight: '200' }}>No Channels Found</Text>}
+            {filteredChannels.length === 0 && <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: '200' }}>No Channels Found</Text>}
 
             {!isLoading ? (
                 <FlatList
@@ -123,7 +125,7 @@ function AllChannelsScreen() {
                     )}
                 />
             ) : (
-                <ActivityIndicator size={40} color={Colors.primary_color} />
+                <ActivityIndicator size={20} color={Colors.primary_color} />
             )}
 
             <FAB
@@ -256,14 +258,16 @@ const FollowingChannelsScreen = () => {
                     marginHorizontal: 3,
                     marginVertical: 8,
                     backgroundColor: '#e8f3f5',
-                    height: 55
+                    height: 50,
+                    marginLeft:15,
+                    width:330,
                 }}
                 cursorColor={Colors.primary_color}
             />
             <View>
                 
             </View>
-            {filteredChannels.length === 0 && <Text style={{ textAlign: 'center', fontSize: 23, fontWeight: '200' }}>No Channels Found</Text>}
+            {filteredChannels.length === 0 && <Text style={{ textAlign: 'center', fontSize: 15, fontWeight: '200' }}>No Channels Found</Text>}
 
             {!isLoading ? (
                 <FlatList
@@ -275,7 +279,7 @@ const FollowingChannelsScreen = () => {
                     )}
                 />
             ) : (
-                <ActivityIndicator size={40} color={Colors.primary_color} />
+                <ActivityIndicator size={20} color={Colors.primary_color} />
             )}
 
             <FAB

@@ -78,14 +78,16 @@ const HomeScreen = ({ navigation }) => {
         style={{ marginHorizontal: 3,
            marginVertical: 8,
             backgroundColor: '#e8f3f5', 
-            height: 55
-            
+            height: 55,
+            width:320,
+            marginLeft:20,
+            marginRight:20,
           }}
           cursorColor={Colors.primary_color}
         
       />
         {isLoading ? (
-          <ActivityIndicator size={40} color={Colors.primary_color} />
+          <ActivityIndicator size={20} color={Colors.primary_color} />
         ) : (
           filteredChats && filteredChats.length > 0 ? (
             <FlatList
