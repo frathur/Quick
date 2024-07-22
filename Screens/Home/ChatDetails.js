@@ -182,13 +182,15 @@ const cancelImageSend = ()=> {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        ref={flatListRef}
-        data={resultData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.ChatId}
-        contentContainerStyle={[styles.messageList]}
-      />
+      <ImageBackground source={'../assets/background.jpeg'} style={styles.background}>
+        <FlatList
+          ref={flatListRef}
+          data={resultData}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.ChatId}
+          contentContainerStyle={[styles.messageList]}
+        />
+      </ImageBackground>
       <View style={styles.inputContainer}>
         {attachedImage && (
           <View style={styles.attachmentContainer}>
@@ -203,10 +205,7 @@ const cancelImageSend = ()=> {
         </TouchableOpacity>
 
        
-      <ImageBackground
-        source={require('../assets/background.jpeg')}
-        style={styles.background}
-      >
+      
         
         <TextInput
           style={styles.input}
@@ -216,7 +215,7 @@ const cancelImageSend = ()=> {
           onSubmitEditing={handleSendMessage}
           cursorColor={Colors.primary_color}
         />
-      </ImageBackground>
+      
          <TouchableOpacity onPress={handleAttachImage}>
           <Ionicons name='attach' style={{marginHorizontal:1}}  size={30} color={Colors.primary_color} />
         </TouchableOpacity>
@@ -291,6 +290,13 @@ const styles = StyleSheet.create({
     marginRight: 8,
     alignContent:'center'
   },
+  background:{
+    flex:1,
+    justifyContent:'center',
+    resizeMode:'center',
+    height:'auto',
+    width:'auto', 
+  }
 });
 
 export default ChatDetails;
