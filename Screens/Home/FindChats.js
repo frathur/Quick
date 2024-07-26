@@ -102,7 +102,7 @@ const FindChats = ({ navigation }) => {
         placeholder="Search"
         onChangeText={handleSearch}
         value={searchQuery}
-        style={{ marginHorizontal: 3, marginVertical: 8, backgroundColor: '#e5ecec', height:55 }}
+        style={{ marginHorizontal: 3, marginVertical: 5, backgroundColor: '#e5ecec', height:55, width:330,marginLeft:15, marginTop:8}}
       />
       <View style={styles.contentContainer}>
         {isLoading ? (
@@ -116,7 +116,7 @@ const FindChats = ({ navigation }) => {
               contentContainerStyle={styles.flatListContainer}
             />
           ) : (
-            <Text style={{textAlign:'center', fontSize:20, marginVertical:18}}>No users found.</Text>
+            <Text style={{textAlign:'center', fontSize:20, marginVertical:18, marginLeft:15}}>No users found.</Text>
           )
         )}
       </View>
@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   flatListContainer: {
     flexGrow: 1,
     paddingBottom: 16,
+    marginLeft:15,
   },
 });
 

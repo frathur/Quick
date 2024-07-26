@@ -104,7 +104,7 @@ const SettingsScreen = ({ navigation }) => {
             <ScrollView style={styles.container}>
                 <View style={styles.profilePicContainer}>
                     <TouchableOpacity onPress={pickImage}>
-                        <Avatar.Image size={100} source={{ uri: userData?.profileUrl }} />
+                        <Avatar.Image size={75} source={{ uri: userData?.profileUrl }} />
                     </TouchableOpacity>
                     <Text style={styles.username}>@ {userData?.username}</Text>
                 </View>
@@ -130,7 +130,7 @@ const SettingsScreen = ({ navigation }) => {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.option}>
-                    <Ionicons name="rose-outline" size={24} color="black" />
+                    <Ionicons name="man-outline" size={24} color="black" />
                     <View style={styles.optionTextContainer}>
                         <Text style={styles.optionName}>Bio</Text>
                         <Text style={styles.optionValue}>{userData?.bio}</Text>
@@ -140,26 +140,21 @@ const SettingsScreen = ({ navigation }) => {
                     <Text style={styles.sectionTitle}>Other</Text>
                 </View>
                 <TouchableOpacity style={styles.option}>
-                    <Ionicons name="share-outline" size={24} color="black" />
+                    <Ionicons name="share-social-outline" size={24} color="black" />
                     <View style={styles.optionTextContainer}>
                         <Text style={styles.optionName}>Share Profile</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate("Studio")} style={styles.option}>
-                    <Ionicons name="stats-chart-outline" size={24} color="black" />
-                    <View style={styles.optionTextContainer}>
-                        <Text style={styles.optionName}>Channel Manager</Text>
-                    </View>
-                </TouchableOpacity>
+               
                 <TouchableOpacity onPress={handleLogOut} style={styles.option}>
                     <Ionicons name='log-out-outline' size={24} color="black" />
                     <View style={styles.optionTextContainer}>
                         <Text style={[styles.optionName, { color: 'red' }]}>Log Out</Text>
                     </View>
                 </TouchableOpacity>
-                <Modal animationType='slide' visible={modalVisible} onDismiss={() => setModalVisible(false)}>
+                <Modal animationType='slide' visible={modalVisible} onDismiss={() => setModalVisible(false)} style ={styles.modalcontainer}>
                     <TouchableOpacity style={styles.modalCloseButton} onPress={() => setModalVisible(false)}>
-                        <Ionicons name='close-circle-outline' color={'#ce6161'} size={40} />
+                        <Ionicons name='close-circle-outline' color={'#000'} size={30} />
                     </TouchableOpacity>
                     <View style={styles.modalContent}>
                         <Text style={styles.text}>Username</Text>
@@ -173,7 +168,7 @@ const SettingsScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.modalButtonContainer}>
                         <TouchableOpacity onPress={() => { updateProfile(); setModalVisible(false); }}>
-                            <Text style={styles.updateButtonText}>Update</Text>
+                            <Text style={{marginLeft:20}}>Update</Text>
                         </TouchableOpacity>
                     </View>
                 </Modal>
@@ -192,14 +187,16 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 20,
+        marginLeft:10
     },
     input: {
         height: 50,
-        borderColor: '#ccc',
+        borderColor: 'blue',
         borderWidth: 1,
         borderRadius: 8,
         paddingHorizontal: 10,
         marginBottom: 15,
+        marginLeft:10,
         backgroundColor: '#fff',
     },
     
@@ -209,6 +206,7 @@ const styles = StyleSheet.create({
     modalContent: {
         marginTop:30,
         paddingHorizontal:8,
+        backgroundColor:Colors.background_color,
     
     }
     ,
@@ -220,7 +218,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        backgroundColor: 'white', // Set your desired profile picture color
+        backgroundColor: Colors.background_color, // Set your desired profile picture color
     },
     option: {
         flexDirection: 'row',
@@ -243,6 +241,15 @@ const styles = StyleSheet.create({
         color:'#555555',
         fontSize:1
     },
+    modalCloseButton:{
+        marginLeft:10,
+        color:'black',
+        marginTop:8
+    },
+    modalcontainer:
+    {
+        backgroundColor:Colors.background_color
+    }
 });
 
 export default SettingsScreen;
