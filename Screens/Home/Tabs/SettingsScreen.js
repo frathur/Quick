@@ -101,88 +101,84 @@ const SettingsScreen = ({ navigation }) => {
         setLoggedInUser(null)
     }
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.profilePicContainer}>
-                <View />
-                <TouchableOpacity onPress={pickImage}>
-                    <Avatar.Image   size={100}  source={{uri:userData?.profileUrl}}/>
+            <ScrollView style={styles.container}>
+                <View style={styles.profilePicContainer}>
+                    <TouchableOpacity onPress={pickImage}>
+                        <Avatar.Image size={100} source={{ uri: userData?.profileUrl }} />
+                    </TouchableOpacity>
+                    <Text style={styles.username}>@ {userData?.username}</Text>
+                </View>
+                <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.option}>
+                    <Ionicons name="mail-outline" size={24} color="black" />
+                    <View style={styles.optionTextContainer}>
+                        <Text style={styles.optionName}>Email</Text>
+                        <Text style={styles.optionValue}>{userData?.email}</Text>
+                    </View>
                 </TouchableOpacity>
-                <Text style={{fontSize:15, color:Colors.tertiary_color, textAlign:'center', padding:8}}>@ {userData?.username}</Text>
-            </View>
-            <TouchableOpacity onPress={()=> setModalVisible(true)} style={[styles.option, styles.alignItemsCenter]}>
-                <Ionicons name="mail-outline" size={24} color="black" />
-                <Text style={styles.optionName}>Email</Text>
-                <Text style={styles.optionValue}>{userData?.email}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> setModalVisible(true)} style={[styles.option, styles.alignItemsCenter]}>
-                <Ionicons name="call-outline" size={24} color="black"  />
-                <Text style={styles.optionName}>Phone</Text>
-                <Text style={styles.optionValue}>{userData?.phone}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> setModalVisible(true)} style={[styles.option, styles.alignItemsCenter]}>
-                <Ionicons name="gift-outline" size={24} color="black" />
-                <Text style={styles.optionName}>Add birthday</Text>
-                <Text style={styles.optionValue}>{userData?.birthday}</Text>
-
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> setModalVisible(true)} style={[styles.option, styles.alignItemsCenter]}>
-                <Ionicons name="rose-outline" size={24} color="black" />
-                <Text style={styles.optionName}>Bio</Text>
-                <Text style={styles.optionValue}>{userData?.bio}</Text>
-
-            </TouchableOpacity>
-            <View style={{marginTop:40}}>
-                <Text style={{fontSize:20, fontWeight:'bold'}}>Other</Text>
-
-                <TouchableOpacity style={[styles.option, styles.alignItemsCenter]}>
+                <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.option}>
+                    <Ionicons name="call-outline" size={24} color="black" />
+                    <View style={styles.optionTextContainer}>
+                        <Text style={styles.optionName}>Phone</Text>
+                        <Text style={styles.optionValue}>{userData?.phone}</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.option}>
+                    <Ionicons name="gift-outline" size={24} color="black" />
+                    <View style={styles.optionTextContainer}>
+                        <Text style={styles.optionName}>Add birthday</Text>
+                        <Text style={styles.optionValue}>{userData?.birthday}</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.option}>
+                    <Ionicons name="rose-outline" size={24} color="black" />
+                    <View style={styles.optionTextContainer}>
+                        <Text style={styles.optionName}>Bio</Text>
+                        <Text style={styles.optionValue}>{userData?.bio}</Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={styles.sectionHeader}>
+                    <Text style={styles.sectionTitle}>Other</Text>
+                </View>
+                <TouchableOpacity style={styles.option}>
                     <Ionicons name="share-outline" size={24} color="black" />
-                    <Text style={styles.optionName}>Share Profile</Text>
+                    <View style={styles.optionTextContainer}>
+                        <Text style={styles.optionName}>Share Profile</Text>
+                    </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> navigation.navigate("Studio")} style={[styles.option, styles.alignItemsCenter]}>
+                <TouchableOpacity onPress={() => navigation.navigate("Studio")} style={styles.option}>
                     <Ionicons name="stats-chart-outline" size={24} color="black" />
-                    <Text style={styles.optionName}>Channel Manager</Text>
+                    <View style={styles.optionTextContainer}>
+                        <Text style={styles.optionName}>Channel Manager</Text>
+                    </View>
                 </TouchableOpacity>
-
-               
-
-            </View>
-            <View style={{ marginTop: 40 }}>
-
-        <TouchableOpacity onPress={handleLogOut} style={[styles.option, styles.alignItemsCenter]}>
-          <Ionicons name='log-out-outline' size={24} color="black" />
-          <Text style={[styles.optionName, { fontSize: 16 }]}>Log Out</Text>
-        </TouchableOpacity>
-
-        {/* Modal Input  */}
-        <Modal  animationType='slide' visible={modalVisible} onDismiss={() => setModalVisible(false)} contentContainerStyle={styles.modalSytle}>
-            <TouchableOpacity style={{alignItems:'flex-end'}} >
-              <Ionicons style={{margin:4}} onPress={() => setModalVisible(false)} name='close-circle-outline' color={'#ce6161'} size={40} />
-            </TouchableOpacity>
-            <View style={styles.modalContent}>
-               <Text style={styles.text}>Username</Text>
-               <TextInput onChangeText={(e)=> setNewUsername(e)}  placeholder={userData?.username} style={styles.input}  /> 
-               <Text style={styles.text}>Phone</Text>
-               <TextInput onChangeText={(e)=> setNewPhone(e)} placeholder='Phone Number' style={styles.input}  /> 
-               <Text style={styles.text}>Birth Day</Text>
-               <TextInput placeholder='dd/mm/yyyy' onChangeText={(e)=>setBirthDay(e)} style={styles.input} /> 
-               <Text style={styles.text}>Bio</Text>
-               <TextInput onChangeText={(e)=> setNewBio(e)}  placeholder={userData?.bio} style={styles.input}  /> 
-
-            </View>
-
-          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 20 }}>
-           
-            <TouchableOpacity onPress={() => {
-              updateProfile()
-              setModalVisible(false)
-            }}>
-              <Text style={{ fontSize: 18, color: Colors.primary_color }}>Update</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      </View>
-        </ScrollView>
-    );
+                <TouchableOpacity onPress={handleLogOut} style={styles.option}>
+                    <Ionicons name='log-out-outline' size={24} color="black" />
+                    <View style={styles.optionTextContainer}>
+                        <Text style={[styles.optionName, { color: 'red' }]}>Log Out</Text>
+                    </View>
+                </TouchableOpacity>
+                <Modal animationType='slide' visible={modalVisible} onDismiss={() => setModalVisible(false)}>
+                    <TouchableOpacity style={styles.modalCloseButton} onPress={() => setModalVisible(false)}>
+                        <Ionicons name='close-circle-outline' color={'#ce6161'} size={40} />
+                    </TouchableOpacity>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.text}>Username</Text>
+                        <TextInput onChangeText={(e) => setNewUsername(e)} placeholder={userData?.username} style={styles.input} />
+                        <Text style={styles.text}>Phone</Text>
+                        <TextInput onChangeText={(e) => setNewPhone(e)} placeholder='Phone Number' style={styles.input} />
+                        <Text style={styles.text}>Birth Day</Text>
+                        <TextInput placeholder='dd/mm/yyyy' onChangeText={(e) => setBirthDay(e)} style={styles.input} />
+                        <Text style={styles.text}>Bio</Text>
+                        <TextInput onChangeText={(e) => setNewBio(e)} placeholder={userData?.bio} style={styles.input} />
+                    </View>
+                    <View style={styles.modalButtonContainer}>
+                        <TouchableOpacity onPress={() => { updateProfile(); setModalVisible(false); }}>
+                            <Text style={styles.updateButtonText}>Update</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+            </ScrollView>
+        );
 }
 
 const styles = StyleSheet.create({
