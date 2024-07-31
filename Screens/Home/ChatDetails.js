@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image, Pressable ,ImageBackground} from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image, Pressable, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '../../constants/Colors';
@@ -16,18 +16,18 @@ import { Video, ResizeMode } from 'expo-av';
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
 const ChatDetails = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [attachedImage, setAttachedImage] = useState(null);
   const flatListRef = useRef(null);
-  const [resultData, setAllData] = useState(null)
-  const { id, items} = route.params
-  const { loggedInUser } = useUserStore()
-  const [imageblob, setImageBlob] = useState(null)
-  const [isVideo, setIsVideo] = useState(false)
+  const [resultData, setAllData] = useState(null);
+  const { id, items } = route.params;
+  const { loggedInUser } = useUserStore();
+  const [imageblob, setImageBlob] = useState(null);
+  const [isVideo, setIsVideo] = useState(false);
   const video = useRef(null);
   const [status, setStatus] = useState({});
 
@@ -35,14 +35,14 @@ const ChatDetails = ({ navigation, route }) => {
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={20} style={{ paddingTop: 6, margin: 4 ,color:Colors.primary_color}} />
+          <Ionicons name="arrow-back" size={20} style={{ paddingTop: 6, margin: 4, color: Colors.primary_color }} />
           <TouchableOpacity style={{ paddingHorizontal: 5 }} onPress={() => navigation.navigate('Profile', { username: route.params.username })}>
             <Avatar.Image size={45} source={{ uri: route.params.profileUrl }} />
           </TouchableOpacity>
         </TouchableOpacity>
       ),
       headerTitle: items?.createdBy === loggedInUser
-        ?items?.receiver?.split("@")[0]
+        ? items?.receiver?.split("@")[0]
         : items?.createdBy?.split("@")[0] || '',
       headerTitleStyle: {
         color: Colors.text_color,
@@ -50,17 +50,16 @@ const ChatDetails = ({ navigation, route }) => {
       },
       headerRight: () => (
         <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={()=> navigation.navigate('Video-Call')} >
-            <Ionicons style={{ padding: 3, marginHorizontal: 3 ,color:Colors.primary_color}} size={25} name='videocam-outline'></Ionicons>
+          <TouchableOpacity onPress={() => navigation.navigate('Video-Call')} >
+            <Ionicons style={{ padding: 3, marginHorizontal: 3, color: Colors.primary_color }} size={25} name='videocam-outline'></Ionicons>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=> navigation.navigate('Voice-Call', {avatarUrl:route.params.profileUrl, username:route.params.username})}>
-            <Ionicons style={{ padding: 3, marginHorizontal: 3 , color:Colors.primary_color}} size={25} name='call-outline'></Ionicons>
+          <TouchableOpacity onPress={() => navigation.navigate('Voice-Call', { avatarUrl: route.params.profileUrl, username: route.params.username })}>
+            <Ionicons style={{ padding: 3, marginHorizontal: 3, color: Colors.primary_color }} size={25} name='call-outline'></Ionicons>
           </TouchableOpacity>
         </View>
       )
     });
-  }, [navigation, route.params?.username, items?.createdBy, items?.receiver])
-  
+  }, [navigation, route.params?.username, items?.createdBy, items?.receiver]);
 
   useEffect(() => {
     const chatRef = doc(db, 'chats', id);
@@ -87,7 +86,7 @@ const ChatDetails = ({ navigation, route }) => {
     if (newMessage.trim() !== '' || attachedImage) {
       let downloadURL = null;
       if (imageblob) {
-       
+
         const blob = await imageblob;
         const storage = getStorage();
         const storageRef = ref(storage, `media/${Date.now()}`);
@@ -137,52 +136,48 @@ const ChatDetails = ({ navigation, route }) => {
     if (!result.cancelled) {
       const response = await fetch(result.assets[0].uri);
       const blob = await response.blob();
-      setImageBlob(blob)
-      switch(result.assets[0].type) {
+      setImageBlob(blob);
+      switch (result.assets[0].type) {
         case 'video':
-          setIsVideo(true)
+          setIsVideo(true);
           break;
         case 'image':
-          setIsVideo(false)
+          setIsVideo(false);
           break;
-       
-
       }
       setAttachedImage(result.assets[0].uri);
-    
     }
-}
-const cancelImageSend = ()=> {
-  setAttachedImage(null)
-  setImageBlob(null)
-}
-  const renderItem = ({ item }) => (
-    <View style={[styles.messageContainer, item.sender === loggedInUser ? styles.sentMessage : styles.receivedMessage, ]}>
-     
-        {item.imageUrl && item.isMediaVideo &&
-        
-        <Pressable onPress={()=>status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()}>
-          <Video 
-          useNativeControls
-          style={[styles.attachedImage]}
-          resizeMode={ResizeMode.CONTAIN}
-          isLooping={false}
-          onPlaybackStatusUpdate={status => setStatus(() => status)}
-          ref={video} source={{uri:item.imageUrl}} />
-        </Pressable>
-        }
+  };
 
+  const cancelImageSend = () => {
+    setAttachedImage(null);
+    setImageBlob(null);
+  };
+
+  const renderItem = ({ item }) => (
+    <View style={[styles.messageContainer, item.sender === loggedInUser ? styles.sentMessage : styles.receivedMessage]}>
+      {item.imageUrl && item.isMediaVideo &&
+        <Pressable onPress={() => status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()}>
+          <Video
+            useNativeControls
+            style={[styles.attachedImage]}
+            resizeMode={ResizeMode.CONTAIN}
+            isLooping={false}
+            onPlaybackStatusUpdate={status => setStatus(() => status)}
+            ref={video} source={{ uri: item.imageUrl }} />
+        </Pressable>
+      }
       {item.imageUrl && !item.isMediaVideo &&
-      <Image  source={{ uri: item.imageUrl }} style={styles.attachedImage} />
+        <Image source={{ uri: item.imageUrl }} style={styles.attachedImage} />
       }
       <Text style={[styles.messageText]}>{item.message}</Text>
-      <Text style={{alignSelf:'flex-end', color:'white', fontSize:10}}>{item.sentTime}</Text>
+      <Text style={{ alignSelf: 'flex-end', color: 'white', fontSize: 10 }}>{item.sentTime}</Text>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={'../assets/background.jpeg'} style={styles.background}>
+      <ImageBackground source={require('../../assets/back.jpg')} style={styles.backgroundImage}>
         <FlatList
           ref={flatListRef}
           data={resultData}
@@ -194,19 +189,15 @@ const cancelImageSend = ()=> {
       <View style={styles.inputContainer}>
         {attachedImage && (
           <View style={styles.attachmentContainer}>
-            <Image source={{ uri: attachedImage }} style={{width:30, height:30, borderRadius:3}} />
+            <Image source={{ uri: attachedImage }} style={{ width: 30, height: 30, borderRadius: 3 }} />
             <TouchableOpacity onPress={cancelImageSend}>
               <Ionicons name="close" size={20} color={Colors.text_color} />
             </TouchableOpacity>
           </View>
         )}
         <TouchableOpacity onPress={handleSendMessage}>
-          <Ionicons name="add-circle-outline" style={{marginHorizontal:1}} size={30} color={Colors.primary_color} />
+          <Ionicons name="add-circle-outline" style={{ marginHorizontal: 1 }} size={30} color={Colors.primary_color} />
         </TouchableOpacity>
-
-       
-      
-        
         <TextInput
           style={styles.input}
           placeholder="Type your message..."
@@ -215,14 +206,12 @@ const cancelImageSend = ()=> {
           onSubmitEditing={handleSendMessage}
           cursorColor={Colors.primary_color}
         />
-      
-         <TouchableOpacity onPress={handleAttachImage}>
-          <Ionicons name='attach' style={{marginHorizontal:1}}  size={30} color={Colors.primary_color} />
+        <TouchableOpacity onPress={handleAttachImage}>
+          <Ionicons name='attach' style={{ marginHorizontal: 1 }} size={30} color={Colors.primary_color} />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSendMessage}>
-          <Ionicons name="send" size={25} color={Colors.primary_color} />
+          <Ionicons name='send' style={{ marginHorizontal: 1 }} size={30} color={Colors.primary_color} />
         </TouchableOpacity>
-        
       </View>
     </View>
   );
@@ -232,7 +221,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background_color,
-    
   },
   messageList: {
     paddingVertical: 16,
@@ -243,7 +231,6 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 12,
     marginVertical: 4,
-    
   },
   sentMessage: {
     backgroundColor: Colors.primary_color,
@@ -252,7 +239,6 @@ const styles = StyleSheet.create({
   receivedMessage: {
     backgroundColor: '#4b94b1',
     alignSelf: 'flex-start',
-    
   },
   messageText: {
     color: 'white',
@@ -274,9 +260,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     marginRight: 12,
-    fontSize:15,
-    fontWeight:'light',
-    
+    fontSize: 15,
+    fontWeight: 'light',
   },
   attachmentContainer: {
     flexDirection: 'row',
@@ -288,14 +273,14 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 8,
     marginRight: 8,
-    alignContent:'center'
+    alignContent: 'center'
   },
-  background:{
-    flex:1,
-    justifyContent:'center',
-    resizeMode:'center',
-    height:'auto',
-    width:'auto', 
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    resizeMode: 'cover', // This will make sure the image covers the entire background
+    width: '100%',
+    height: '100%',
   }
 });
 

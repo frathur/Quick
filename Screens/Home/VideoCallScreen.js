@@ -9,12 +9,10 @@ const VideoCallScreen = ({ navigation }) => {
   const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {
-    // Camera permissions are still loading.
     return <View />;
   }
 
   if (!permission.granted) {
-    // Camera permissions are not granted yet.
     return (
       <View style={styles.container}>
         <Text style={styles.text}>We need your permission to show the camera</Text>
@@ -34,15 +32,15 @@ const VideoCallScreen = ({ navigation }) => {
       <CameraView style={styles.camera} facing={facing}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.actionButton} onPress={toggleCameraFacing}>
-            <Icon name="camera-retro" size={24} color="#fff" />
-            <Text style={styles.buttonText}>Flip Camera</Text>
+            <Icon name="camera-retro" size={32} color="#fff" />
+            <Text style={styles.buttonText}>Flip</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
-            <Icon name="microphone-slash" size={24} color="#fff" />
-            <Text style={styles.buttonText}>Mute Microphone</Text>
+            <Icon name="microphone-slash" size={32} color="#fff" />
+            <Text style={styles.buttonText}>Mute</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()} style={[styles.actionButton, styles.endCallButton]}>
-            <Icon name="phone" size={24} color="#fff" />
+            <Icon name="phone" size={32} color="#fff" />
             <Text style={styles.buttonText}>Hang Up</Text>
           </TouchableOpacity>
         </View>
@@ -69,12 +67,14 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 32,
-    marginHorizontal: 8,
+    paddingVertical: 11,
+    paddingHorizontal: 15,
+    borderRadius: 15,
+    marginHorizontal: 5,
+    width:'30%',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   endCallButton: {
     backgroundColor: '#DC3545',
