@@ -59,6 +59,7 @@ const HomeScreen = ({ navigation }) => {
       snapshot.docs.forEach((doc) => {
         chats.push({ id: doc.id, ...doc.data() });
       });
+      console.log(chats)
       const sortedChats = chats.sort((a, b) => b.updatedAt - a.updatedAt);
       setAllChats(sortedChats);
       setFilteredChats(chats);

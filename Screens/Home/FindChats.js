@@ -73,7 +73,7 @@ const FindChats = ({ navigation }) => {
       <AccountBar
         avatarUrl={item.profileUrl}
         onPress={() => {
-          handlePress(item.username, item.profileUrl);
+          handlePress(item.email, item.profileUrl);
         }}
         username={`@${item.username}`}
         bio={item.bio}
