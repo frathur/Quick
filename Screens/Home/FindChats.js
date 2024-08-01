@@ -136,9 +136,8 @@ const styles = StyleSheet.create({
   flatListContainer: {
     flexGrow: 1,
     paddingBottom: 16,
-    marginLeft:8,
-    borderWidth:0,
-    borderColor:'transparent'
+    marginLeft:5,
+   
     
   },
   flatList:{

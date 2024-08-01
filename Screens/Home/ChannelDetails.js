@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '../../constants/Colors';
@@ -159,55 +159,58 @@ const cancelImageSend = ()=> {
   );
 
   return (
-    <View style={styles.container}>
-      { resultData?.length === 0 && <ActivityIndicator style={{marginVertical:15}} size={40} color={Colors.primary_color} />
- }
-      <FlatList
-        ref={flatListRef}
-        data={resultData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.ChatId}
-        contentContainerStyle={[styles.messageList]}
-      />
-
-      { isAdmin?  
-      <View style={styles.inputContainer}>
-        {attachedImage && (
-          <View style={styles.attachmentContainer}>
-            <Image source={{ uri: attachedImage }} style={{width:30, height:30, borderRadius:3}} />
-            <TouchableOpacity onPress={cancelImageSend}>
-              <Ionicons name="close" size={20} color={Colors.text_color} />
-            </TouchableOpacity>
-          </View>
-        )}
-        <TouchableOpacity onPress={handleSendMessage}>
-          <Ionicons name="add-circle-outline" style={{marginHorizontal:1}} size={30} color={Colors.primary_color} />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleAttachImage}>
-          <Ionicons name='film-outline' style={{marginHorizontal:1}}  size={30} color={Colors.primary_color} />
-        </TouchableOpacity>
-        
-        <TextInput
-          style={styles.input}
-          placeholder="Type your message..."
-          value={newMessage}
-          onChangeText={setNewMessage}
-          onSubmitEditing={handleSendMessage}
-          cursorColor={Colors.primary_color}
-        />
-        
-        <TouchableOpacity onPress={handleSendMessage}>
-          <Ionicons name="send" size={30} color={Colors.primary_color} />
-        </TouchableOpacity>
-        
-      </View>:
-        <View style={{backgroundColor:Colors.secodary_color_tint}} >
-          <Text style={{textAlign:'center', color:Colors.tertiary_color}} >Only Admins Can Send Messages</Text>
-      </View>
-      }
+    <ImageBackground source={require('../../assets/back.jpg')} style={styles.backgroundImage}>
+      <View style={styles.container}>
+        { resultData?.length === 0 && <ActivityIndicator style={{marginVertical:15}} size={20} color={Colors.primary_color} />}
       
-    </View>
+          <FlatList
+            ref={flatListRef}
+            data={resultData}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.ChatId}
+            contentContainerStyle={[styles.messageList]}
+          />
+        
+
+        { isAdmin?  
+        <View style={styles.inputContainer}>
+          {attachedImage && (
+            <View style={styles.attachmentContainer}>
+              <Image source={{ uri: attachedImage }} style={{width:30, height:30, borderRadius:3}} />
+              <TouchableOpacity onPress={cancelImageSend}>
+                <Ionicons name="close" size={20} color={Colors.text_color} />
+              </TouchableOpacity>
+            </View>
+          )}
+          <TouchableOpacity onPress={handleSendMessage}>
+            <Ionicons name="add-circle-outline" style={{marginHorizontal:1}} size={30} color={Colors.primary_color} />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={handleAttachImage}>
+            <Ionicons name='film-outline' style={{marginHorizontal:1}}  size={30} color={Colors.primary_color} />
+          </TouchableOpacity>
+          
+          <TextInput
+            style={styles.input}
+            placeholder="Type your message..."
+            value={newMessage}
+            onChangeText={setNewMessage}
+            onSubmitEditing={handleSendMessage}
+            cursorColor={Colors.primary_color}
+          />
+          
+          <TouchableOpacity onPress={handleSendMessage}>
+            <Ionicons name="send" size={30} color={Colors.primary_color} />
+          </TouchableOpacity>
+          
+        </View>:
+          <View style={{backgroundColor:Colors.secodary_color_tint}} >
+            <Text style={{textAlign:'center', color:Colors.tertiary_color}} >Only Admins Can Send Messages</Text>
+        </View>
+        }
+        
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -273,6 +276,13 @@ const styles = StyleSheet.create({
     marginRight: 8,
     alignContent:'center'
   },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    resizeMode: 'cover', // This will make sure the image covers the entire background
+    width: '100%',
+    height: '100%',
+  }
 });
 
 export default ChannelDetails;

@@ -104,7 +104,7 @@ const HomeScreen = ({ navigation }) => {
         <FAB
           icon="chat-plus"
           style={styles.fab}
-          color={Colors.secodary_color_tint}
+          color={'#e8f3f5'}
           onPress={() => navigation.navigate("Find-User")}
         />
       </View>
@@ -120,8 +120,9 @@ const styles = StyleSheet.create({
   flatListContainer: {
     flexGrow: 1,
     paddingBottom: 16,
-    marginLeft:15,
+    marginLeft:4,
     fontSize:5,
+    
   },
   fab: {
     position: 'absolute',
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary_color,
   },
   noDataText: {
-    fontSize: 5,
+    fontSize: 8,
     color: Colors.gray,
     textAlign: 'center',
     marginTop: 20,
