@@ -291,7 +291,7 @@ const FollowingChannelsScreen = () => {
             <Snackbar
                 visible={visible}
                 onDismiss={onDismissSnackBar}
-                style={{color:Colors.primary_color}}
+                style={{color:Colors.primary_color, borderCurve:2}}
                 rippleColor={Colors.primary_color}
                 action={{
                 label: 'Okay',
@@ -314,12 +314,12 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     flexGrow: 1,
-    paddingBottom: 16,
+    paddingBottom: 10,
   },
  
   fab: {
     position: 'absolute',
-    margin: 16,
+    margin: 10,
     right: 0,
     bottom: 0,
     backgroundColor: Colors.primary_color,

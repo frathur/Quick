@@ -5,13 +5,12 @@ import Colors from '../../constants/Colors';
 import { useRoute } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 
-
-const VoiceCallScreen = ({navigation}) => {
+const VoiceCallScreen = ({ navigation }) => {
   const [duration, setDuration] = useState(0);
   const [isCallActive, setIsCallActive] = useState(true);
   const [sound, setSound] = useState();
 
-  const route = useRoute()
+  const route = useRoute();
 
   async function playSound() {
     console.log('Loading Sound');
@@ -40,13 +39,13 @@ const VoiceCallScreen = ({navigation}) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDuration(duration + 1);
+      setDuration((prevDuration) => prevDuration + 1);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [duration]);
+  }, []);
 
-  const handleEndCall = async() => {
+  const handleEndCall = async () => {
     setIsCallActive(false);
     await sound.stopAsync(); // Stop the sound when the call ends
     navigation.goBack();
@@ -57,7 +56,7 @@ const VoiceCallScreen = ({navigation}) => {
       <Image source={{ uri: route.params.avatarUrl }} style={styles.profileImage} />
       <Text style={styles.name}>{route.params.username}</Text>
       <Text style={styles.status}>
-        {isCallActive ? `Ringing....` : 'Call Ended'}
+        {isCallActive ? 'Ringing....' : 'Call Ended'}
       </Text>
 
       <View style={styles.actionContainer}>
@@ -78,7 +77,7 @@ const VoiceCallScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primary_color,
+    backgroundColor: '#1c1c1c', // Darker background color similar to Telegram's call screen
     alignItems: 'center',
     justifyContent: 'center',
   },

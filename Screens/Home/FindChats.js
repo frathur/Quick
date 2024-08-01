@@ -114,6 +114,7 @@ const FindChats = ({ navigation }) => {
               renderItem={renderItem}
               keyExtractor={(item) => item.email}
               contentContainerStyle={styles.flatListContainer}
+              style={styles.flatList}
             />
           ) : (
             <Text style={{textAlign:'center', fontSize:20, marginVertical:18, marginLeft:15}}>No users found.</Text>
@@ -135,8 +136,15 @@ const styles = StyleSheet.create({
   flatListContainer: {
     flexGrow: 1,
     paddingBottom: 16,
-    marginLeft:15,
+    marginLeft:8,
+    borderWidth:0,
+    borderColor:'transparent'
+    
   },
+  flatList:{
+    borderWidth:0,
+    borderColor:'transparent'
+  }
 });
 
 export default FindChats;

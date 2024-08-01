@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, TouchableOpacity, Text, Image, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '../../constants/Colors';
@@ -40,7 +40,7 @@ const CopilotPage = ({ navigation, route }) => {
         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} style={{ paddingTop: 5, margin: 4 }} />
           <TouchableOpacity style={{ paddingHorizontal: 5 }} >
-            <Avatar.Image size={45} source={require('../../assets/clout-pilot.jpg')} />
+            <Avatar.Image size={45} source={require('../../assets/ai.jpg')} />
           </TouchableOpacity>
         </TouchableOpacity>
       ),
@@ -140,13 +140,15 @@ const CopilotPage = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        ref={flatListRef}
-        data={messages}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.ChatId}
-        contentContainerStyle={[styles.messageList]}
-      />
+      <ImageBackground source={require('../../assets/back.jpg')} style={styles.backgroundImage} >
+        <FlatList
+          ref={flatListRef}
+          data={messages}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.ChatId}
+          contentContainerStyle={[styles.messageList]}
+        />
+      </ImageBackground>
       <View style={styles.inputContainer}>
         {attachedImage && (
           <View style={styles.attachmentContainer}>
@@ -235,6 +237,13 @@ const styles = StyleSheet.create({
     marginRight: 8,
     alignContent:'center'
   },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    resizeMode: 'cover', // This will make sure the image covers the entire background
+    width: '100%',
+    height: '100%',
+  }
 });
 
 export default CopilotPage;

@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   receivedMessage: {
-    backgroundColor: '#4b94b1',
+    backgroundColor: '#86898f',
     alignSelf: 'flex-start',
   },
   messageText: {
