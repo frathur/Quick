@@ -204,7 +204,7 @@ const cancelImageSend = ()=> {
           </TouchableOpacity>
           
         </View>:
-          <View style={{backgroundColor:Colors.secodary_color_tint}} >
+          <View style={{backgroundColor:Colors.secodary_color_tint,marginBottom:10, borderColor:Colors.primary_color}} >
             <Text style={{textAlign:'center', color:Colors.tertiary_color}} >Only Admins Can Send Messages</Text>
         </View>
         }

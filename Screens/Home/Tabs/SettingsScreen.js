@@ -179,19 +179,33 @@ const SettingsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        padding: -5,
         backgroundColor:Colors.background_color
+    },
+    sectionTitle:{
+        color:'white',
+        paddingLeft:10,
+        fontSize:15
+    },
+    username:{
+        flex:1,
+        fontSize:20,
+        fontWeight:'bold',
+        textAlign:'center',
+        marginTop:-53,
+        marginLeft:-60,
+        marginBottom:30
     },
     text: {color:'grey', fontSize:12, padding:8},
     title: {
-        fontSize: 22,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: 'regular',
         marginBottom: 20,
         marginLeft:10
     },
     input: {
         height: 50,
-        borderColor: 'blue',
+        borderColor: Colors.primary_color,
         borderWidth: 1,
         borderRadius: 8,
         paddingHorizontal: 10,
@@ -211,8 +225,15 @@ const styles = StyleSheet.create({
     }
     ,
     profilePicContainer: {
-        alignItems: 'center',
+        flex:1,
+        alignItems: 'left',
         marginBottom: 20,
+        borderBottomWidth:1,
+        borderColor:'white',
+        backgroundColor:'#a8adb1',
+        paddingLeft:20,
+        paddingRight:20,
+        paddingTop:10,
     },
     profilePic: {
         width: 100,
@@ -249,6 +270,11 @@ const styles = StyleSheet.create({
     modalcontainer:
     {
         backgroundColor:Colors.background_color
+    },
+    optionTextContainer:{
+        paddingLeft:10,
+        paddingRight:20,
+        marginLeft:10
     }
 });
 

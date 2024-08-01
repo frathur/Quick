@@ -6,26 +6,25 @@ import { Checkbox } from 'react-native-paper';
 
 import { firebaseConfig } from '../../Configs/firebase';
 import { initializeApp } from 'firebase/app';
-import { getFirestore,setDoc, doc, collection } from 'firebase/firestore';
+import { getFirestore, setDoc, doc, collection } from 'firebase/firestore';
 import { useUserStore } from '../../store/UserDataStore';
 
 import * as ImagePicker from 'expo-image-picker';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
-
-const CreateChannelScreen = ({navigation}) => {
+const CreateChannelScreen = ({ navigation }) => {
   const [channelName, setChannelName] = useState('');
   const [channelDescription, setChannelDescription] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
   const [checked, setChecked] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState('https://img.eg')
-  const {loggedInUser} = useUserStore();
-  const [searchQuery, setSearchQuery] = useState('')
-  const [imageblob, setImageBlob] = useState(null)
-  const [imageLocal, setLocalImage] = useState('https://imag.eg')
+  const [avatarUrl, setAvatarUrl] = useState('https://img.eg');
+  const { loggedInUser } = useUserStore();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [imageblob, setImageBlob] = useState(null);
+  const [imageLocal, setLocalImage] = useState('https://imag.eg');
   const tags = [
     { id: 1, label: 'Education' },
     { id: 2, label: 'Food' },
@@ -50,20 +49,16 @@ const CreateChannelScreen = ({navigation}) => {
   const handleCreateChannel = async () => {
     try {
       const channelId = 'channel_' + Date.now().toString();
-  
       const newChatRef = doc(collection(db, 'channels'), channelId);
-  
       const storage = getStorage();
       const storageRef = ref(storage, `avatars/${Date.now()}`);
-  
+
       let downloadURL = '';
       if (imageblob) {
-        // Upload the image to Firebase Storage
         await uploadBytes(storageRef, imageblob);
-        // Retrieve the download URL of the uploaded image
         downloadURL = await getDownloadURL(storageRef);
       }
-  
+
       await setDoc(newChatRef, {
         channelId: channelId,
         name: channelName,
@@ -79,46 +74,40 @@ const CreateChannelScreen = ({navigation}) => {
         isMonetized: checked,
         dateCreated: new Date().toLocaleString(),
       });
-  
+
       setSelectedTags([]);
       setChannelDescription('');
       setChannelName('');
       setImageBlob('');
       setLocalImage('');
-  
-      alert("Channe Created")
+
+      alert("Channel Created");
     } catch (error) {
       console.error('Error creating channel:', error);
-      alert('Can\t Create Create Channel ');
+      alert('Cannot Create Channel');
       setImageBlob('');
       setLocalImage('');
     }
   };
-  
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
-        const response = await fetch(result.assets[0].uri);
-        const blob = await response.blob();
-        setImageBlob(blob)
-        setLocalImage(result.assets[0].uri)
-
+      const response = await fetch(result.assets[0].uri);
+      const blob = await response.blob();
+      setImageBlob(blob);
+      setLocalImage(result.assets[0].uri);
     }
-};
-
-  
+  };
 
   return (
     <View style={styles.container}>
-
       <TouchableOpacity onPress={pickImage}>
         <Avatar.Image style={{ margin: 4 }} size={100} source={{ uri: imageLocal }} />
       </TouchableOpacity>
@@ -138,29 +127,27 @@ const CreateChannelScreen = ({navigation}) => {
       </View>
       <Divider style={{ marginVertical: 15 }} />
 
-      <View style={{ flexDirection: 'row' }}>
+      {/* <View style={{ flexDirection: 'row' }}>
         <Checkbox
           status={checked ? 'checked' : 'unchecked'}
-          onPress={() => {
-            setChecked(!checked);
-          }}
+          onPress={() => setChecked(!checked)}
           color={Colors.primary_color}
         />
         <Text style={{ paddingTop: 8 }}>Monetize</Text>
-      </View>
+      </View> */}
 
       <View>
         <Text style={styles.subscriptionText}>
-          Unlock Exclusive Earning Opportunities with Cloud Chat's Paid Subscription
+        Enhance your QuickTalk channel with our premium features. 
         </Text>
         <Text style={styles.subscriptionDescription}>
-          Leverage the power of our platform to monetize your channel and content. By
-          upgrading to a paid subscription, you'll gain access to advanced features
-          and tools that enable you to generate revenue from your audience.
+        Take advantage of our platform to monetize your channel and content. 
+        Upgrade to a paid subscription and unlock premium features
+         and powerful tools designed to help you generate revenue and grow your audience
         </Text>
       </View>
       <Divider style={{ marginVertical: 15 }} />
-      <Text style={styles.sectionTitle}>Select Tags</Text>
+      <Text style={styles.sectionTitle}>Categories</Text>
       <View style={styles.tagContainerWrapper}>
         <ScrollView horizontal style={[styles.tagContainer, { maxHeight: 80 }]}>
           {tags.map((tag) => (
@@ -193,16 +180,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   inputContainer: {
-    marginVertical:8,
+    marginVertical: 8,
     marginBottom: 16,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: Colors.primary_color,
     borderRadius: 4,
     paddingVertical: 8,
     paddingHorizontal: 12,
     marginBottom: 8,
+    backgroundColor:'white'
   },
   sectionTitle: {
     fontSize: 16,
@@ -210,20 +198,22 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   tagContainerWrapper: {
-    marginBottom: 16,
+    marginBottom: 11,
   },
   tagContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  
   },
   tag: {
-    backgroundColor: Colors.primary_color_tint,
+    backgroundColor: 'white',
     marginRight: 8,
   },
   selectedTag: {
     backgroundColor: Colors.primary_color,
     elevation: 2,
-    color: '#fff',
+    color: 'white',
+    borderColor:Colors.primary_color
   },
   createButton: {
     backgroundColor: Colors.primary_color,
